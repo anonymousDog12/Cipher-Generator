@@ -26,10 +26,10 @@ class CipherGenerator:
         instruction2 = Label(master = master, font=DEFAULT_FONT,
                            text="PLAINTEXT: ")
         instruction2.grid(row=2, sticky="W")
-        self.user_entry = Text(master = master, height = 13, 
+        self.plain_entry = Text(master = master, height = 13, 
                                font="Courier")
-        self.user_entry.config(width = 74, highlightbackground = "#f6f6f6")
-        self.user_entry.grid(row = 3)
+        self.plain_entry.config(width = 74, highlightbackground = "#f6f6f6")
+        self.plain_entry.grid(row = 3)
         
         # ============ Encrypt Button and Clear ============
         encrypt_button = Button(master = master, font = DEFAULT_FONT,
@@ -37,9 +37,10 @@ class CipherGenerator:
                                command = self.encrypt_message)
         encrypt_button.grid(row = 4, padx=(0, 300))
         
-        clear1_button = Button(master = master, font = DEFAULT_FONT,
-                              width = 10, text = "CLEAR")
-        clear1_button.grid(row = 4, padx=(300, 0))
+        clear_plain_button = Button(master = master, font = DEFAULT_FONT,
+                              width = 17, command = self.clear_plain_entry,
+                              text = "CLEAR PLAIN TEXT")
+        clear_plain_button.grid(row = 4, padx=(200, 0))
         
         Label(master, text = "").grid(row = 5)
         Label(master, text = "").grid(row = 6)
@@ -48,10 +49,10 @@ class CipherGenerator:
         instruction3 = Label(master = master, font=DEFAULT_FONT,
                            text="CIPHERTEXT: ")
         instruction3.grid(row=7, sticky="W")
-        self.user_entry = Text(master = master, height = 13, 
+        self.cipher_entry = Text(master = master, height = 13, 
                                font="Courier")
-        self.user_entry.config(width = 74, highlightbackground = "#f6f6f6")
-        self.user_entry.grid(row = 8)
+        self.cipher_entry.config(width = 74, highlightbackground = "#f6f6f6")
+        self.cipher_entry.grid(row = 8)
         
         # ============ Decrypt Button and Clear ============
         encrypt_button = Button(master = master, font = DEFAULT_FONT,
@@ -59,16 +60,29 @@ class CipherGenerator:
                                command = self.decrypt_message)
         encrypt_button.grid(row = 9, padx=(0, 300))
         
-        clear2_button = Button(master = master, font = DEFAULT_FONT,
-                              width = 10, text = "CLEAR")
-        clear2_button.grid(row = 9, padx=(300, 0))
+        clear_cipher_button = Button(master = master, font = DEFAULT_FONT,
+                              width = 17, command = self.clear_cipher_entry,
+                              text = "CLEAR CIPHER TEXT")
+        clear_cipher_button.grid(row = 9, padx=(200, 0))
         
         
     def encrypt_message(self):
-        plain_text = self.user_entry.get("1.0", 'end-1c')
+        plain_text = self.plain_entry.get("1.0", 'end-1c')
     
     def decrypt_message(self):
         print("TODO")
+    
+    def set_plain_entry(self, text):
+        pass
+    
+    def set_cipher_entry(self, text):
+        pass
+    
+    def clear_plain_entry(self):
+        self.plain_entry.delete("1.0", 'end-1c')
+    
+    def clear_cipher_entry(self):
+        self.cipher_entry.delete("1.0", 'end-1c')
         
         
 
