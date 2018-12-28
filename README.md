@@ -2,7 +2,7 @@
 
 How to use: 	
 
-Run CipherGenerator.py, then enter your text	
+Run ```CipherGenerator.py```, then enter your text	
 
 More ciphers will be supported soon! 	
 
