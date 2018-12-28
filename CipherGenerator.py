@@ -1,4 +1,5 @@
 from tkinter import *
+from CipherFunctions import *
 
 DEFAULT_FONT = ("courier", 20)
 CIPHER_TYPES = {'Caesar', 'Substitution'}
@@ -71,49 +72,34 @@ class CipherGenerator:
     def get_cipher(self, value):
         self.cipher = value
     
-    # ============ Encryption Functions ============
     def encrypt_message(self):
         plain_text = self.plain_entry.get("1.0", 'end-1c')
         self.cipher_entry.delete("1.0", 'end-1c')
-        
+    
         if self.cipher == "Caesar":
-            cipher_text = self.Caesar_encrypt(plain_text)
+            cipher_text = Caesar_encrypt(plain_text)
         elif self.cipher == "Substitution":
-            cipher_text = self.Substitution_encrypt(plain_text)
+            cipher_text = Substitution_encrypt(plain_text)
         else:
             cipher_text = "ERROR: ENCRIPTION CIPHER NOT RECOGNIZED!" 
 
         self.cipher_entry.insert("1.0", cipher_text)
         
-    def Caesar_encrypt(self, text):
-        # TODO
-        return "CAESAR ENCRYPED YO!"
     
-    def Substitution_encrypt(self, text): 
-        return "SUBSTITUTION ENCRYPED YO!"
-    
-    # ============ Decryption Functions ============
     def decrypt_message(self):
         cipher_text = self.cipher_entry.get("1.0", 'end-1c')
         self.plain_entry.delete("1.0", 'end-1c')
         
         if self.cipher == "Caesar":
-            plain_text = self.Caesar_decrypt(cipher_text)
+            plain_text = Caesar_decrypt(cipher_text)
         elif self.cipher == "Substitution":
-            plain_text = self.Substitution_decrypt(cipher_text)
+            plain_text = Substitution_decrypt(cipher_text)
         else:
             plain_text = "ERROR: DECRYPTION CIPHER NOT RECOGNIZED!"
             
         self.plain_entry.insert("1.0", plain_text)
+        
     
-    def Caesar_decrypt(self, text):
-        return "CAESAR DECRYPED YO!"
-    
-    def Substitution_decrypt(self, text): 
-        return "SUBSTITUTION DECRYPED YO!"
-    
-    
-    # ============ Clear Button Commands ============
     def clear_plain_entry(self):
         self.plain_entry.delete("1.0", 'end-1c')
     
