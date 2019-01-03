@@ -2,7 +2,7 @@ from tkinter import *
 from CipherFunctions import *
 
 DEFAULT_FONT = ("courier", 20)
-CIPHER_TYPES = {'Caesar', 'Substitution'}
+CIPHER_TYPES = {'Atbash', 'Baconian', 'Caesar', 'ROT13', 'Substitution', }
 DEFAULT_CIPHER = ('Caesar')
 
 class CipherGenerator:
@@ -80,6 +80,12 @@ class CipherGenerator:
             cipher_text = Caesar_encrypt(plain_text)
         elif self.cipher == "Substitution":
             cipher_text = Substitution_encrypt(plain_text)
+        elif self.cipher == "Atbash":
+            cipher_text = Atbash_encrypt(plain_text)
+        elif self.cipher == "ROT13":
+            cipher_text = Rot13_encrypt(plain_text)
+        elif self.cipher == "Baconian":
+            cipher_text = Baconian_encrypt(plain_text)
         else:
             cipher_text = "ERROR: ENCRIPTION CIPHER NOT RECOGNIZED!" 
 
@@ -94,6 +100,12 @@ class CipherGenerator:
             plain_text = Caesar_decrypt(cipher_text)
         elif self.cipher == "Substitution":
             plain_text = Substitution_decrypt(cipher_text)
+        elif self.cipher == "Atbash":
+            plain_text = Atbash_decrypt(cipher_text)
+        elif self.cipher == "ROT13":
+            plain_text = Rot13_decrypt(cipher_text)
+        elif self.cipher == "Baconian":
+            plain_text = Baconian_decrypt(cipher_text)
         else:
             plain_text = "ERROR: DECRYPTION CIPHER NOT RECOGNIZED!"
             
