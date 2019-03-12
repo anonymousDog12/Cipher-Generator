@@ -155,3 +155,74 @@ def Baconian_decrypt(text):
             res += char
     return res
     
+#=================== RSA cipher=====================
+
+from MR import generate_prime
+from random import randrange
+from math import gcd
+
+
+CH_BOUND=146
+
+def RSA(K):#generate a K bit n as key
+    assert (K>3)
+    
+    p=generate_prime(K//2+1)
+    q=generate_prime(K//2+1)
+    while q==p:
+        q=generate_prime(K//2+1)
+    n=p*q
+    e=randrange(1,n,2)
+    while(gcd(e,(p-1)*(q-1))!=1):
+        e=randrange(1,n,2)
+    phi=(p-1)*(q-1)
+    #print(phi)
+    d=EE(e,phi)[1]
+    if d<0:
+        d+=phi
+    return n,e,d
+
+def EE(a,b):
+    r0,r1=a,b 
+    s0,s1=1,0
+    t0,t1=0,1
+    if r1==0:
+        return abs(a),1,0
+    
+    q1,r2=divmod(r0,r1)
+    s2=s0-s1*q1
+    t2=t0-t1*q1
+    
+    while(r2!=0):
+        r1,r0=r2,r1
+        s1,s0=s2,s1
+        t1,t0=t2,t1
+        q1,r2=divmod(r0,r1)
+        s2=s0-s1*q1
+        t2=t0-t1*q1        
+    return r1,s1,t1
+
+def RSA_encrypt(text,n,e):
+    if len(text)>CH_BOUND:
+        return "Out of text bound, "+str(len(text))+" characters were input"
+    return str(pow(str2num(text),e,n))
+
+
+def RSA_decrypt(text,n,d):
+    return num2str(pow(int(text),d,n))
+
+def str2num(text):
+    num=0
+    N=128
+    for x in text:
+        num*=N
+        num+=ord(x)
+    return num
+
+def num2str(num):
+    N=128
+    text=''
+    while num!=0:
+        text+=chr(num%N)
+        num//=N
+    return text[::-1]
